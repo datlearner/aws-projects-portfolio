@@ -58,7 +58,7 @@ The Birds application allows students to record and explore bird sightings. It i
 8. Application uses these credentials to query DynamoDB and return data to the protected admin page  
 
 **Architecture Diagram:**  
-![Architecture Diagram](diagrams/start.png)
+![Architecture Diagram](diagrams/start.png,final.png)
 
 ---
 
