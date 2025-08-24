@@ -57,8 +57,15 @@ The Birds application allows students to record and explore bird sightings. It i
 7. Application exchanges the token with the **Cognito Identity Pool**, which issues temporary AWS credentials  
 8. Application uses these credentials to query DynamoDB and return data to the protected admin page  
 
-**Architecture Diagram:**  
-![Architecture Diagram](diagrams/start.png)(diagrams/final.png)
+**Architecture Diagram:** 
+
+**Starting Architecture:**
+
+![Starting Architecture](diagrams/start.png)
+
+**Final Architecture:**
+
+![Final Architecture](diagrams/final.png)
 
 ---
 
