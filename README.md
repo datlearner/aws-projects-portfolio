@@ -18,8 +18,8 @@ These labs are designed to align with **AWS certification paths** (Cloud Practit
 1. [VPC Peering Connection](01-vpc-peering-connection)  
    *Create a private VPC peering connection between two VPCs, configure routes, enable VPC Flow Logs, and analyze traffic.*
 
-2. [S3 Static Website Hosting](02-s3-static-website)  
-   *Host a static website on Amazon S3 with CloudFront CDN, Route 53 DNS, and security best practices.*
+2. [Securing Applications with Amazon Cognito](02-securing-applications)  
+   *This project integrates Amazon Cognito with a Node.js web application to provide secure authentication and authorization.*
 
 3. [EC2 Auto Scaling Demo](03-ec2-auto-scaling)  
    *Launch an auto-scaling group behind an Application Load Balancer with CloudWatch monitoring.*
