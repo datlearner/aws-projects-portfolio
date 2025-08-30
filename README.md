@@ -21,8 +21,8 @@ These labs are designed to align with **AWS certification paths** (Cloud Practit
 2. [Securing Applications with Amazon Cognito](02-securing-applications)  
    *This project integrates Amazon Cognito with a Node.js web application to provide secure authentication and authorization.*
 
-3. [EC2 Auto Scaling Demo](03-ec2-auto-scaling)  
-   *Launch an auto-scaling group behind an Application Load Balancer with CloudWatch monitoring.*
+3. [aws-encryption-at-rest](03-aws-encryption-at-rest)  
+   *Secured data at rest by encrypting S3 objects and EBS volumes using AWS KMS, with CloudTrail monitoring and key management.*
 
 4. [Serverless App with Lambda + DynamoDB](04-lambda-dynamodb-app)  
    *Deploy a serverless backend powered by AWS Lambda, API Gateway, and DynamoDB.*
