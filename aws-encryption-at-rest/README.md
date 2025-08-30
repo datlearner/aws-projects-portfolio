@@ -32,7 +32,7 @@ Architecture
 Starting Architecture
 
 ## 🏗 Architecture Diagram
-![Architecture Diagram](images/Starting-Arc.png)
+![Architecture Diagram](images/Starting-arc.png)
 
 
 ✅ Data stored in Amazon S3 is encrypted using default AWS-managed keys
