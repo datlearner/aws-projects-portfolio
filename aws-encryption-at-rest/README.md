@@ -1,81 +1,74 @@
 Encrypting Data at Rest with AWS Encryption Options
-📌 Overview
+Overview
 
-This project demonstrates how to secure data at rest in AWS by using Amazon S3 default encryption, AWS Key Management Service (AWS KMS), and Amazon EBS encryption. It also highlights how to audit and monitor encryption activities with AWS CloudTrail.
+Securing sensitive information is a critical part of cloud security. AWS provides several encryption options that protect data at rest across storage and compute services.
 
-🛠️ Prerequisites & Tools Used
+In this project, I implemented encryption using both default AWS encryption mechanisms and customer managed keys (CMKs) in AWS Key Management Service (KMS). I applied encryption to Amazon S3 objects and Amazon EBS volumes, and monitored encryption activities using AWS CloudTrail.
 
-AWS Account with appropriate permissions
+This project demonstrates how encryption impacts data access and how disabling or rotating encryption keys affects workloads in AWS.
 
-AWS Services:
+Objectives
 
-Amazon S3 (object storage & default encryption)
+✅ Reviewed default encryption provided by Amazon S3
+✅ Accessed an encrypted Amazon S3 object
+✅ Created an AWS KMS customer managed key (CMK)
+✅ Encrypted and attached an Amazon EBS volume to an EC2 instance
+✅ Disabled and re-enabled a KMS key and observed access effects
+✅ Monitored encryption key usage with AWS CloudTrail event history
+✅ Reviewed KMS key rotation policies
 
-Amazon EC2 (compute instance for EBS attachment)
+Scenario
 
-Amazon EBS (encrypted volumes)
+A company wants to ensure that all stored data is encrypted at rest to meet compliance and security requirements. The tasks included:
 
-AWS Key Management Service (KMS)
+✅ Validating default S3 encryption for uploaded objects
+✅ Creating a KMS key to enforce customer-managed encryption policies
+✅ Encrypting block storage (EBS volumes) attached to EC2 instances
+✅ Demonstrating how disabling a key blocks access to encrypted data
+✅ Auditing key usage via CloudTrail logs
+✅ Reviewing key lifecycle management through rotation policies
 
-AWS CloudTrail (audit logging)
+Architecture
+Starting Architecture
 
-IAM Role/Policy with access to KMS, S3, EC2, and CloudTrail
-
-AWS Management Console or AWS CLI for configuration
-
-🎯 Objectives
-
-
-Review the default encryption provided by Amazon S3.
-
-Access an encrypted Amazon S3 object.
-
-Create an AWS KMS customer managed key to encrypt and decrypt data at rest.
-
-Create and attach an encrypted Amazon EBS volume to an Amazon EC2 instance.
-
-Disable and re-enable an AWS KMS key and observe the effects on data access.
-
-Monitor encryption key usage with AWS CloudTrail event history.
-
-Review KMS key rotation policies.
-
-## 🏗 Architecture Diagram  
-![Architecture Diagram](images/architecture.png)
+## 🏗 Architecture Diagram
+![Architecture Diagram](images/Starting-Arc.png)
 
 
+✅ Data stored in Amazon S3 is encrypted using default AWS-managed keys
+✅ EC2 instances use unencrypted EBS volumes
+✅ No centralized monitoring of encryption key usage
 
-🛠️ Project Steps
-1. Review Default S3 Encryption
+## Final Architecture
 
-2. Access Encrypted S3 Object
+![Architecture Diagram](images/Final-Arc.png)
 
-3. Create a KMS Customer Managed Key
 
-4. Encrypt and Attach an EBS Volume
+✅ Amazon S3 objects encrypted with both default and customer-managed keys
+✅ Amazon EBS volume attached to an EC2 instance, encrypted using a KMS CMK
+✅ AWS KMS provides centralized key management
+✅ AWS CloudTrail monitors key usage events and access attempts
+✅ Disabling/re-enabling keys directly impacts access to encrypted resources
 
-5. Key Lifecycle Management (Disable/Re-enable Key)
+Key AWS Services Used
 
-6. Monitor Key Usage with CloudTrail
+✅ Amazon S3 – Object storage with default and KMS-based encryption
+✅ Amazon EBS – Encrypted volumes for EC2 instances
+✅ Amazon EC2 – Compute service to attach and test encrypted storage
+✅ AWS KMS – Customer managed keys (CMKs) for encryption/decryption
+✅ AWS CloudTrail – Audit logs of key usage and access patterns
 
-7. Review Key Rotation
+Lessons Learned
 
-✅ Conclusion
+✅ How default encryption differs from customer-managed encryption in S3
+✅ The process of creating and using KMS CMKs for EBS and S3
+✅ How disabling a KMS key immediately blocks access to encrypted resources
+✅ The importance of CloudTrail logs for auditing encryption activity
+✅ Benefits of enabling automatic key rotation to strengthen security posture
 
-In this project, I:
+Next Steps
 
-Reviewed default encryption in Amazon S3.
-
-Accessed encrypted S3 objects.
-
-Created and used an AWS KMS customer managed key.
-
-Encrypted and attached an EBS volume to an EC2 instance.
-
-Observed the effects of disabling and re-enabling a KMS key.
-
-Monitored key usage with AWS CloudTrail.
-
-Reviewed KMS key rotation.
-
-This project demonstrates the importance of encryption at rest and shows how AWS services make it easier to implement strong security practices.
+✅ Explore cross-account KMS key usage for multi-team collaboration
+✅ Enable AWS Config to continuously monitor encryption compliance
+✅ Implement AWS Secrets Manager to securely store application secrets
+✅ Extend encryption use cases to RDS databases and EFS file systems
