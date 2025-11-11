@@ -21,7 +21,7 @@ These labs are designed to align with **AWS certification paths** (Cloud Practit
 2. [Securing Applications with Amazon Cognito](https://github.com/datlearner/aws-projects-portfolio/tree/main/Securing-Applications-by-Using-Amazon-Cognito)  
    *This project integrates Amazon Cognito with a Node.js web application to provide secure authentication and authorization.*
 
-3. [aws-encryption-at-rest](https://github.com/datlearner/aws-projects-portfolio/tree/main/vpc-peering-connection)  
+3. [aws-encryption-at-rest](https://github.com/datlearner/aws-projects-portfolio/tree/main/aws-encryption-at-rest)  
    *Secured data at rest by encrypting S3 objects and EBS volumes using AWS KMS, with CloudTrail monitoring and key management.*
 
 
