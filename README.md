@@ -18,10 +18,10 @@ These labs are designed to align with **AWS certification paths** (Cloud Practit
 1. [VPC Peering Connection](https://github.com/datlearner/aws-projects-portfolio/tree/main/vpc-peering-connection)  
    *Create a private VPC peering connection between two VPCs, configure routes, enable VPC Flow Logs, and analyze traffic.*
 
-2. [Securing Applications with Amazon Cognito](02-securing-applications)  
+2. [Securing Applications with Amazon Cognito](https://github.com/datlearner/aws-projects-portfolio/tree/main/Securing-Applications-by-Using-Amazon-Cognito)  
    *This project integrates Amazon Cognito with a Node.js web application to provide secure authentication and authorization.*
 
-3. [aws-encryption-at-rest](03-aws-encryption-at-rest)  
+3. [aws-encryption-at-rest](https://github.com/datlearner/aws-projects-portfolio/tree/main/vpc-peering-connection)  
    *Secured data at rest by encrypting S3 objects and EBS volumes using AWS KMS, with CloudTrail monitoring and key management.*
 
 
