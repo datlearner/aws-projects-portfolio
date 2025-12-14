@@ -1,194 +1,169 @@
-AWS Organizations – Real-World Enterprise Project
+🚀 AWS Organizations – Real-World Enterprise Project
+
+
+
+
 📌 Project Overview
 
-This project demonstrates how to design and implement a secure, multi-account AWS Organization following real enterprise best practices. It simulates how a growing company structures accounts, applies governance using Service Control Policies (SCPs), and enforces security and cost controls at scale.
+This project demonstrates how to design and implement a secure, multi-account AWS Organization following real enterprise best practices.
+It simulates how a growing company structures accounts, applies governance using Service Control Policies (SCPs), and enforces security and cost controls at scale.
+
+Focused on Cloud / Solutions Architect and DevOps roles. This project emphasizes governance, security, and architecture, not just launching resources.
 
 🏢 Business Scenario
 
 Company: TechNova Ltd (fictional)
 
-TechNova started with a single AWS account. As the company grew, they faced:
+Challenges as the company grew:
 
-Poor security controls
+❌ Poor security controls
 
-No environment separation (Dev/Test/Prod)
+❌ No environment separation (Dev/Test/Prod)
 
-High cloud costs
+❌ High cloud costs
 
-No centralized logging or auditing
+❌ No centralized logging or auditing
 
 🎯 Goal
 
-Design an AWS Organization that:
+Separate workloads into multiple accounts
 
-Separates workloads into multiple accounts
+Apply security guardrails with SCPs
 
-Applies security guardrails using SCPs
+Control costs and enforce approved regions
 
-Controls costs and regions
+Follow AWS Well-Architected best practices
 
-Follows AWS Well-Architected best practices
+## 🏗️ Organization Architecture
 
-🏗️ Organization Architecture
-Root
-│
-├── Security OU
-│ ├── Log-Archive Account
-│ └── Security-Tooling Account
-│
-├── Infrastructure OU
-│ └── Shared-Services Account
-│
-├── Workloads OU
-│ ├── Dev Account
-│ ├── Test Account
-│ └── Prod Account
-│
-└── Sandbox OU
-└── Developer-Sandbox Account
+```mermaid
+graph TD
+    Root["Root"]
+    SecurityOU["Security OU"]
+    LogArchive["Log-Archive Account"]
+    SecurityTooling["Security-Tooling Account"]
+    InfrastructureOU["Infrastructure OU"]
+    SharedServices["Shared-Services Account"]
+    WorkloadsOU["Workloads OU"]
+    Dev["Dev Account"]
+    Test["Test Account"]
+    Prod["Prod Account"]
+    SandboxOU["Sandbox OU"]
+    DevSandbox["Developer-Sandbox Account"]
+
+    Root --> SecurityOU
+    SecurityOU --> LogArchive
+    SecurityOU --> SecurityTooling
+
+    Root --> InfrastructureOU
+    InfrastructureOU --> SharedServices
+
+    Root --> WorkloadsOU
+    WorkloadsOU --> Dev
+    WorkloadsOU --> Test
+    WorkloadsOU --> Prod
+
+    Root --> SandboxOU
+    SandboxOU --> DevSandbox
+
+
+📌 Screenshot: architecture-diagram.png
+
+![Alt Text](architecture-diagram.png)
 
 🔐 Service Control Policies (SCPs)
 
-SCPs are used to define maximum permissions across accounts. Even administrators cannot bypass them.
+SCPs enforce maximum permissions across accounts. Even admins cannot bypass them.
 
-1️⃣ Deny Root User Usage
+<details> <summary>1️⃣ Deny Root User Usage</summary>
 
-Purpose: Prevent usage of the AWS root user in all member accounts.
-
-{
-"Version": "2012-10-17",
-"Statement": [
-{
-"Sid": "DenyRootUser",
-"Effect": "Deny",
-"Action": "*",
-"Resource": "*",
-"Condition": {
-"StringEquals": {
-"aws:PrincipalType": "Root"
-}
-}
-}
-]
-}
-
-📌 Attached to: All OUs except Management Account
-
-2️⃣ Restrict AWS Regions
-
-Purpose: Enforce compliance and cost control by allowing resources only in approved regions.
-
-Allowed Regions: us-east-1, eu-west-1
-
-
-📌 Attached to: All OUs except Management Account
-
-2️⃣ Restrict AWS Regions
-
-Purpose: Enforce compliance and cost control by allowing resources only in approved regions.
-
-Allowed Regions: us-east-1, eu-west-1
-
-📌 Attached to: All OUs except Management Account
-
-2️⃣ Restrict AWS Regions
-
-Purpose: Enforce compliance and cost control by allowing resources only in approved regions.
-
-Allowed Regions: us-east-1, eu-west-1
+Purpose: Prevent usage of AWS root user in all member accounts.
 
 {
-"Version": "2012-10-17",
-"Statement": [
-{
-"Sid": "DenyOtherRegions",
-"Effect": "Deny",
-"NotAction": [
-"iam:*",
-"organizations:*",
-"route53:*",
-"cloudfront:*"
-],
-"Resource": "*",
-"Condition": {
-"StringNotEquals": {
-"aws:RequestedRegion": [
-"us-east-1",
-"eu-west-1"
-]
-}
-}
-}
-]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyRootUser",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalType": "Root"
+        }
+      }
+    }
+  ]
 }
 
-📌 Attached to: Workloads OU, Sandbox OU
+Attached to: All OUs except Management Account
 
-3️⃣ Cost Control – Block Expensive Services in Dev
+</details> <details> <summary>2️⃣ Restrict AWS Regions</summary>
 
-Purpose: Prevent accidental high cloud bills in non-production accounts.
+Purpose: Allow resources only in approved regions (us-east-1, eu-west-1).
 
 {
-"Version": "2012-10-17",
-"Statement": [
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyOtherRegions",
+      "Effect": "Deny",
+      "NotAction": [
+        "iam:*",
+        "organizations:*",
+        "route53:*",
+        "cloudfront:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:RequestedRegion": [
+            "us-east-1",
+            "eu-west-1"
+          ]
+        }
+      }
+    }
+  ]
+}
+
+Attached to: Workloads OU, Sandbox OU
+
+</details> <details> <summary>3️⃣ Cost Control – Block Expensive Services in Dev</summary>
+
+Purpose: Prevent high cloud bills in non-production accounts.
+
 {
-"Sid": "DenyExpensiveServices",
-"Effect": "Deny",
-"Action": [
-"sagemaker:*",
-"redshift:*",
-"elasticmapreduce:*"
-],
-"Resource": "*"
-}
-]
-}
-
-📌 Attached to: Dev and Sandbox accounts
-
-4️⃣ Protect Production Environment
-
-Purpose: Prevent deletion of critical production resources.
-
-{
-"Version": "2012-10-17",
-"Statement": [
-{
-"Sid": "DenyDeleteInProd",
-"Effect": "Deny",
-"Action": [
-"ec2:TerminateInstances",
-"rds:DeleteDBInstance",
-"s3:DeleteBucket"
-],
-"Resource": "*"
-}
-]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyExpensiveServices",
+      "Effect": "Deny",
+      "Action": [
+        "sagemaker:*",
+        "redshift:*",
+        "elasticmapreduce:*"
+      ],
+      "Resource": "*"
+    }
+  ]
 }
 
-📌 Attached to: Prod Account only
+Attached to: Prod Account only
 
-👥 IAM Strategy
+</details>
 
-No IAM users in member accounts
+Attached to: Prod Account only
 
-Cross-account IAM roles used for access
-
-Principle of least privilege enforced
-
-Example roles:
-
-DevOpsRole → Dev & Test
-
-ReadOnlySecurityRole → All accounts
+</details>
 
 🧠 Key Learnings
 
 How enterprises scale AWS securely
 
-Why multi-account strategy is critical
+Importance of multi-account strategy
 
-How SCPs enforce governance at scale
+SCPs enforce governance at scale
 
 Real-world cost and security controls
 
