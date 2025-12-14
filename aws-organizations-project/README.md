@@ -1,6 +1,5 @@
+```mermaid
 🚀 AWS Organizations – Real-World Enterprise Project
-
-
 
 
 📌 Project Overview
@@ -36,7 +35,6 @@ Follow AWS Well-Architected best practices
 
 ## 🏗️ Organization Architecture
 
-```mermaid
 graph TD
     Root["Root"]
     SecurityOU["Security OU"]
