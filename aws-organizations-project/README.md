@@ -65,7 +65,7 @@ graph TD
     Root --> SandboxOU
     SandboxOU --> DevSandbox
 
-📌 Screenshot reference:
+
 
 🔐 Service Control Policies (SCPs)
 
