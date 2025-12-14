@@ -65,7 +65,8 @@ graph TD
     Root --> SandboxOU
     SandboxOU --> DevSandbox
 
-```markdown
+
+```
 
 🔐 Service Control Policies (SCPs)
 
@@ -174,7 +175,7 @@ Purpose: Prevent deletion of critical production resources.
 Attached to: Prod Account only
 
 </details>
-👥 IAM Strategy
+## 👥 IAM Strategy
 Role Name	Access	Purpose
 DevOpsRole	Dev & Test	Full access for deployment & testing
 ReadOnlySecurityRole	All accounts	Read-only security monitoring
@@ -187,7 +188,7 @@ Cross-account roles for access
 
 Principle of least privilege
 
-🧠 Key Learnings
+## 🧠 Key Learnings
 
 How enterprises scale AWS securely
 
@@ -197,7 +198,7 @@ SCPs enforce governance at scale
 
 Real-world cost and security controls
 
-🚀 Next Improvements
+## 🚀 Next Improvements
 
 Automate with Terraform
 
