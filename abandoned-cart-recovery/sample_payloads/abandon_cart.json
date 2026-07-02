@@ -1,0 +1,22 @@
+{
+  "cart_id": "cart-demo-001",
+  "customer_email": "customer@example.com",
+  "customer_name": "Kundai Muchemwa",
+  "store_name": "Demo Store",
+  "recover_url": "https://yourstore.com/cart/cart-demo-001",
+  "cart_total": 149.99,
+  "cart_items": [
+    {
+      "product_id": "SKU-1042",
+      "name": "Running Shoes Pro",
+      "price": 99.99,
+      "qty": 1
+    },
+    {
+      "product_id": "SKU-0871",
+      "name": "Water Bottle",
+      "price": 24.99,
+      "qty": 2
+    }
+  ]
+}
